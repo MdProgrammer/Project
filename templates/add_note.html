@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}Add note{% endblock %}
+{% block nav %}<li id="user_id"><textarea name="user_id" id="ser_id" cols="30" rows="2" readonly>Your id is: {{ user_id }}</textarea></li>{% endblock %}
+{% block body %}
+<style>
+    #note {
+        display: block;
+        overflow: hidden;
+        resize: none;
+    }
+    #title {
+        display: block;
+        overflow: hidden;
+        resize: none;
+    }
+</style>
+<div id="yo">
+    <form method="POST" id="no">
+        <ul>
+            <li><textarea id="title" name="title" autofocus rows="1" cols="1" maxlength="100" onkeyup="rmSpace(event)" placeholder="Title"></textarea></li>
+            <li><textarea id="note" name="note" cols="50" maxlength="10000" placeholder="Take a note"></textarea></li>
+            <li><p id="chars">you have typed 0 characters.</p></li>
+            <li><input type="text" id="share" name="shared" placeholder="Enter the ids of the people you want to share this note with" autocomplete="off"></li>
+            <li><input type="submit" value="Add Note" id="add_note"></li>
+        </ul>
+    </form>
+</div>
+    <script type="text/javascript">
+    textarea = document.querySelector("#note");
+    textarea.addEventListener("input", fun, false);
+        function fun(){
+            this.style.height = "auto";
+            this.style.height = this.scrollHeight + "px";
+            he = this.scrollHeight;
+            he = he + 85;
+            document.querySelector("#add_note").style.position = "absolute";
+            document.querySelector("#add_note").style.top = (he + 109) + "px";
+            document.querySelector("#add_note").style.right = 0 + "px";
+            //moving ids
+            document.querySelector("#share").style.position = "absolute";
+            document.querySelector("#share").style.top = (he + 39) + "px";
+
+            document.querySelector("#no").style.height = "auto";
+            document.querySelector("#no").style.height = (this.scrollHeight + document.querySelector("#title").scrollHeight + 35) + "px";
+            //str length
+            str = document.querySelector("#note").value.length;
+            document.querySelector("#chars").innerHTML = "you have typed " + str + " characters.";
+            //moving it
+            document.querySelector("#chars").style.position = "absolute";
+            document.querySelector("#chars").style.top = (he - 2) + "px";
+        }
+        document.querySelector("#title").addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+    	    $("#note").focus();
+            }
+        });
+        function rmSpace(){
+        var b = document.querySelector("#title").value;
+        var res = b.replace(/\n/g, "");
+        document.querySelector("#title").value = res;
+        }
+
+</script>
+{% endblock %}

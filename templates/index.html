@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}Main{% endblock %}
+{% block nav %}<li id="user_id"><textarea name="user_id" id="ser_id" cols="30" rows="2" readonly>Your id is: {{ user_id }}</textarea></li>{% endblock %}
+{% block body %}
+
+    <div class="parent">
+        {% for i in info %}
+
+            <div class="note_card">
+                <div class="rectangle" id="view_note_form">
+                    <form method="POST">
+                        <div class="line"></div>
+                        <div class="line1"></div>
+                        <textarea maxlength="20" readonly class="note_title" name="note_title">{{ i["note_name"] }}</textarea>
+                        <textarea readonly class="disn" name="disn">{{ i["id"] }}</textarea>
+                        <input type="hidden" name="form-name" value="form1">
+                        <textarea readonly id="the_note" name="the_note">{{ i["content"] }}</textarea>
+                        <div class="view_note">
+                            <button id="view_btn" type="submit">
+                                <div class="rect"></div>
+                                <span id="view_text">View and edit</span>
+                            </button>
+                        </div>
+                    </form>
+                    <form method="POST">
+                        <textarea readonly class="disn" name="disn">{{ i["id"] }}</textarea>
+                        <input type="hidden" name="form-name" value="form2">
+                        <div class="dropdown">
+                            <button class="dropbtn"><i class="bi bi-three-dots"></i></button>
+                            <div class="dropdown-content">
+                                <button type="submit" id="delete">Delete</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

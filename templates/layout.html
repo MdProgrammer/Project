@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewprot" content="width=device-width, intial-scal=1.0">
+        <script src="https://kit.fontawesome.com/d3aa9c3a92.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+            <nav>
+                <input type="checkbox" id="check">
+                <label for="check" class="checkbtn">
+                    <i class="fas fa-bars"></i>
+                </label>
+                <label class="logo">NOTTER</label>
+                <ul>
+                    {% if logged == True %}
+                        <li><a href="/"> My notes</a></li>
+                        {% if innote == False %}
+                            <li><a href="add_note">add note</a></li>
+                        {% endif %}
+                        <li><a href="logout">log out</a></li>
+                        {% block nav %}{% endblock %}
+                    {% endif %}
+                    {% if logged == False%}
+                        <li><a href="register">Register</a></li>
+                    {% endif %}
+                    {% if logged == None%}
+                        <li><a href="login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+                {% block body %}{% endblock %}
+    </body>
+</html>
+
