@@ -4,6 +4,8 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from tempfile import mkdtemp
 from flask_login import LoginManager
+import os
+
 
 app = Flask(__name__)
 
@@ -16,7 +18,8 @@ app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-db = SQL("sqlite:///notter.db")
+db = SQL(os.getenv("postgres://ankizvkmkycunc:4d71a6af9f4ab4e333ba720340866f539e58713fec6c8b6552d28db9de9a9912@ec2-3-213-76-170.compute-1.amazonaws.com:5432/ded5npgbq3phdf
+"))
 
 @app.route("/", methods=["GET", "POST"])
 def index():
